@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- Mecanicos.hbm.xml -->
+ <class name="clasesBean.Mecanico" table="Mecanico">
+ <id name="idMecanico" type="integer">
+ <column name="idMecanico" />
+ <generator class="assigned" />
+ </id>
+ <property name="nombreMecanico" type="string">
+ <column name="nombreMecanico" length="45" not-null="false" />
+ </property>
+ <property name="apellido1Mecanico" type="string">
+ <column name="apellido1Mecanico"  length="45" not-null="false" />
+ </property>
+ <property name="apellido2Mecanico" type="string">
+ <column name="apellido2Mecanico"  length="45" not-null="false" />
+ </property>
+<property name="dniMecanico" type="string">
+ <column name="dniMecanico" length="9" not-null="false" />
+ </property>
+ <property name="sueldoMecanico" type="int">
+ <column name="sueldoMecanico" not-null="false" />
+ </property>
+<set name="mantenimiento">
+ <key>
+ <column name="idMecanicoFK" /> <!-- columna que es la fk de Mantenimiento -->
+ </key>
+ <one-to-many class="clasesBean.Mantenimiento" />
+</set> 
+ </class>
+ </hibernate-mapping>

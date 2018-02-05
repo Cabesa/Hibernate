@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- Manteni.hbm.xml -->
+ <class name="clasesBean.Mantenimiento" table="Mantenimiento">
+ <id name="idMantenimiento" type="integer">
+ <column name="idMantenimiento" />
+ <generator class="assigned" />
+ </id>
+ <property name="nombreMantenimiento" type="string">
+ <column name="nombreMantenimiento" length="45" not-null="false" />
+ </property>
+ <property name="costeMantenimiento" type="int">
+ <column name="costeMantenimiento" not-null="false" />
+ </property>
+<property name="horasMantenimiento" type="int">
+ <column name="horasMantenimiento" not-null="false" />
+ </property>
+ <property name="informeMantenimiento" type="string">
+ <column name="informeMantenimiento" length="500" not-null="false" />
+ </property>
+
+ <many-to-one name="mecanico" >
+ <column name="idMecanicoFK" />
+</many-to-one>
+<many-to-one name="vagon" >
+ <column name="idVagonFK" />
+</many-to-one>
+ </class>
+</hibernate-mapping>

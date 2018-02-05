@@ -1,0 +1,82 @@
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import clasesBean.Mantenimiento;
+import clasesDAO.MantenimientoDAO;
+
+import javax.swing.JLabel;
+
+public class BorrarMantenimiento extends JDialog implements ActionListener
+{
+
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblBorrado = new JLabel();
+	private JButton btnBorrar = new JButton("Borrar");
+	Mantenimiento man;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args)
+	{
+		try
+		{
+			BorrarMantenimiento dialog = new BorrarMantenimiento();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public BorrarMantenimiento()
+	{
+		setTitle("Borrar Mantenimiento");
+		setBounds(100, 100, 450, 131);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		{
+			
+			contentPanel.add(lblBorrado);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.	CENTER));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				
+				buttonPane.add(btnBorrar);
+				getRootPane().setDefaultButton(btnBorrar);
+			}
+		}
+		btnBorrar.addActionListener(this);
+	}
+	public void CargarDatos(int id){
+		man =MantenimientoDAO.buscarPorID(id);
+		lblBorrado.setText("Está seguro que desea BORRAR el mantenimiento "+man.getNombreMantenimiento()+" realizado por "+man.getMecanico().getNombreMecanico()+" "+man.getMecanico().getApellido1Mecanico());
+		setBounds(100, 100, lblBorrado.getText().length()*8, 130);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		MantenimientoDAO.borrar(man);
+		Principal.ActualizarTablas();
+		setVisible(false);
+	}
+
+}

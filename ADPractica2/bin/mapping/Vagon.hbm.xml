@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- Vagons.hbm.xml -->
+ <class name="clasesBean.Vagon" table="Vagon">
+ <id name="idVagon" type="integer">
+ <column name="idVagon" />
+ <generator class="assigned" />
+ </id>
+ <property name="fabricanteVagon" type="string">
+ <column name="fabricanteVagon" length="45" not-null="false" />
+ </property>
+ <property name="modeloVagon" type="string">
+ <column name="modeloVagon"  length="45" not-null="false" />
+ </property>
+ <property name="antiguedadVagon" type="int">
+ <column name="antiguedadVagon"  not-null="false" />
+ </property>
+ <property name="capacidadVagon" type="int">
+ <column name="capacidadVagon"  not-null="false" />
+ </property>
+  <property name="matriculaVagon" type="int">
+ <column name="matriculaVagon"  not-null="false" />
+ </property>
+<set name="mantenimiento">
+ <key>
+ <column name="idVagonFK" /> <!-- columna que es la fk de Mantenimientos -->
+ </key>
+ <one-to-many class="clasesBean.Mantenimiento" />
+</set> 
+ </class>
+ </hibernate-mapping>
