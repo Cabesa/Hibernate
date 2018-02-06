@@ -201,7 +201,6 @@ public class NuevoMantenimiento extends JDialog implements ActionListener
 			}
 		}
 		btnCrear.addActionListener(this);
-		CargarChoices();
 		setVisible(false);
 		}
 	public void CargarChoices(){
@@ -243,6 +242,13 @@ public class NuevoMantenimiento extends JDialog implements ActionListener
 		Principal.ActualizarTablas();
 		setVisible(false);
 		
+	}
+	public void VaciarCampos()
+	{
+		txtNombre.setText("");
+		txtHoras.setText("");
+		txtCoste.setText("");
+		txtInforme.setText("");
 	}
 
 

@@ -93,38 +93,13 @@ public class Principal extends JFrame implements ActionListener
 	{
 		
 		CargaInterfaz();
-		cargarTablas();
+		
 
 	}
 
-	public void cargarTablas()
-	{
-		List<Mantenimiento> busqueda = MantenimientoDAO.buscarTodos();
 
-		for (Mantenimiento m : busqueda)
-		{
-			DefaultTableModel modelo=(DefaultTableModel) tableSegunda.getModel();
-			modelo.addRow(new Object[]{m.getIdMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
-		
-		}
-		List<Mecanico> busqueda2 = MecanicoDAO.buscarTodos();
 
-		for (Mecanico m : busqueda2)
-		{
-			DefaultTableModel modelo=(DefaultTableModel) tableTercera.getModel();
-			modelo.addRow(new Object[]{m.getIdMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
-		
-		}
-		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
-
-		for (Vagon m : busqueda3)
-		{
-			DefaultTableModel modelo=(DefaultTableModel) tablePrimera.getModel();
-			modelo.addRow(new Object[]{m.getIdVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
-		
-		}
-
-	}
+	
 	public void CargaInterfaz(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Taller");
@@ -166,7 +141,7 @@ public class Principal extends JFrame implements ActionListener
 		tablePrimera = new JTable();
 		tablePrimera.setModel(new DefaultTableModel(new Object[][]
 		{}, new String[]
-		{ "Número", "Fabricante", "Módelo" }));
+		{ "Matrícula", "Fabricante", "Módelo" }));
 		tablePrimera.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane = new JScrollPane(tablePrimera);
 
@@ -214,7 +189,7 @@ public class Principal extends JFrame implements ActionListener
 		tableSegunda = new JTable();
 		tableSegunda.setModel(new DefaultTableModel(new Object[][]
 		{}, new String[]
-		{ "Número", "Nombre", "Coste" }));
+		{ "Horas", "Nombre", "Coste" }));
 		tableSegunda.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane2 = new JScrollPane(tableSegunda);
 
@@ -262,7 +237,7 @@ public class Principal extends JFrame implements ActionListener
 		tableTercera = new JTable();
 		tableTercera.setModel(new DefaultTableModel(new Object[][]
 		{}, new String[]
-		{ "Número", "Nombre", "Apellido" }));
+		{ "DNI", "Nombre", "Apellido" }));
 		tableTercera.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane3 = new JScrollPane(tableTercera);
 
@@ -305,6 +280,7 @@ public class Principal extends JFrame implements ActionListener
 		btnModificarPrimera.addActionListener(this);
 		btnModificarSegunda.addActionListener(this);
 		btnModificarTercera.addActionListener(this);
+		ActualizarTablas();
 		
 	}
 
@@ -323,7 +299,9 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnNuevoSegunda)
 		{
-			new NuevoMantenimiento();
+			nueMantenimiento.CargarChoices();
+			nueMantenimiento.VaciarCampos();
+			nueMantenimiento.setVisible(true);
 		}
 		if (e.getSource() == btnModificarPrimera)
 		{
@@ -390,7 +368,7 @@ public class Principal extends JFrame implements ActionListener
 		for (Mantenimiento m : busqueda)
 		{
 			
-			modelo.addRow(new Object[]{m.getIdMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
+			modelo.addRow(new Object[]{m.getHorasMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
 		
 		}
 		//Actualizar Tabla Mecanico
@@ -403,7 +381,7 @@ public class Principal extends JFrame implements ActionListener
 		for (Mecanico m : busqueda2)
 		{
 			
-			modelo2.addRow(new Object[]{m.getIdMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
+			modelo2.addRow(new Object[]{m.getDniMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
 		
 		}
 		//Actualizar tabla Vagon
@@ -415,7 +393,7 @@ public class Principal extends JFrame implements ActionListener
 		for (Vagon m : busqueda3)
 		{
 			
-			modelo3.addRow(new Object[]{m.getIdVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
+			modelo3.addRow(new Object[]{m.getMatriculaVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
 		
 		}
 		
