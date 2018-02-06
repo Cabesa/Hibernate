@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
 
@@ -64,6 +65,9 @@ public class Principal extends JFrame implements ActionListener
 	NuevoVagon nueVagon = new NuevoVagon();
 	NuevoMantenimiento nueMantenimiento = new NuevoMantenimiento();
 	public static Session session = HibernateUtil.getSession();
+	static ArrayList idsMecanicos = new ArrayList();
+	static ArrayList idsVagones = new ArrayList();
+	static ArrayList idsMantenimientos = new ArrayList();
 
 	/**
 	 * Launch the application.
@@ -325,7 +329,8 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnVerPrimera)
 		{
-			idVagon =(int) tablePrimera.getValueAt(tablePrimera.getSelectedRow(), 0);
+			
+			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
 			new VerVagon();
 		}
 		if (e.getSource() == btnVerTercera)
@@ -346,7 +351,7 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnBorrarPrimera)
 		{
-			idVagon =(int) tablePrimera.getValueAt(tablePrimera.getSelectedRow(), 0);
+			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
 			borVagon.CargarDatos(idVagon);
 			borVagon.setVisible(true);
 		}
@@ -359,6 +364,10 @@ public class Principal extends JFrame implements ActionListener
 	}
 	public static void ActualizarTablas()
 	{
+		//Resteo arrays ids
+		idsVagones.clear();
+		idsMantenimientos.clear();
+		idsMecanicos.clear();
 		//Actualizar tabla Mantenimiento
 		List<Mantenimiento> busqueda = MantenimientoDAO.buscarTodos();
 		DefaultTableModel modelo=(DefaultTableModel) Principal.tableSegunda.getModel();
@@ -367,7 +376,7 @@ public class Principal extends JFrame implements ActionListener
 			 modelo.removeRow(0);
 		for (Mantenimiento m : busqueda)
 		{
-			
+			idsMantenimientos.add(m.getIdMantenimiento());
 			modelo.addRow(new Object[]{m.getHorasMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
 		
 		}
@@ -380,7 +389,7 @@ public class Principal extends JFrame implements ActionListener
 
 		for (Mecanico m : busqueda2)
 		{
-			
+			idsMecanicos.add(m.getIdMecanico());
 			modelo2.addRow(new Object[]{m.getDniMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
 		
 		}
@@ -392,7 +401,7 @@ public class Principal extends JFrame implements ActionListener
 			 modelo3.removeRow(0);
 		for (Vagon m : busqueda3)
 		{
-			
+			idsVagones.add(m.getIdVagon());
 			modelo3.addRow(new Object[]{m.getMatriculaVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
 		
 		}
