@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -33,8 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
 
-public class Principal extends JFrame implements ActionListener
-{
+public class Principal extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	static JTable tablePrimera;
@@ -55,9 +55,9 @@ public class Principal extends JFrame implements ActionListener
 	static int idMantenimiento;
 	static int idMecanico;
 	static int idVagon;
-	ModificarMantenimiento modMantenimiento=new ModificarMantenimiento();
-	ModificarVagon modVagon=new ModificarVagon();
-	ModificarMecanico modMecanico=new ModificarMecanico();
+	ModificarMantenimiento modMantenimiento = new ModificarMantenimiento();
+	ModificarVagon modVagon = new ModificarVagon();
+	ModificarMecanico modMecanico = new ModificarMecanico();
 	BorrarMantenimiento borMantenimiento = new BorrarMantenimiento();
 	BorrarVagon borVagon = new BorrarVagon();
 	BorrarMecanico borMecanico = new BorrarMecanico();
@@ -72,18 +72,13 @@ public class Principal extends JFrame implements ActionListener
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -93,18 +88,13 @@ public class Principal extends JFrame implements ActionListener
 	/**
 	 * Create the frame.
 	 */
-	public Principal()
-	{
-		
+	public Principal() {
+
 		CargaInterfaz();
-		
 
 	}
 
-
-
-	
-	public void CargaInterfaz(){
+	public void CargaInterfaz() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Taller");
 		setBounds(100, 100, 450, 300);
@@ -112,14 +102,10 @@ public class Principal extends JFrame implements ActionListener
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]
-		{ 0, 0 };
-		gbl_contentPane.rowHeights = new int[]
-		{ 0, 0 };
-		gbl_contentPane.columnWeights = new double[]
-		{ 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[]
-		{ 1.0, Double.MIN_VALUE };
+		gbl_contentPane.columnWidths = new int[] { 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -132,20 +118,15 @@ public class Principal extends JFrame implements ActionListener
 		JPanel pnl1 = new JPanel();
 		tabbedPane.addTab("Vagones", null, pnl1, null);
 		GridBagLayout gbl_pnl1 = new GridBagLayout();
-		gbl_pnl1.columnWidths = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl1.rowHeights = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl1.columnWeights = new double[]
-		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnl1.rowWeights = new double[]
-		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl1.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl1.columnWeights = new double[] { 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl1.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnl1.setLayout(gbl_pnl1);
 
 		tablePrimera = new JTable();
-		tablePrimera.setModel(new DefaultTableModel(new Object[][]
-		{}, new String[]
-		{ "Matrícula", "Fabricante", "Módelo" }));
+		tablePrimera.setModel(
+				new DefaultTableModel(new Object[][] {}, new String[] { "Matrícula", "Fabricante", "Módelo" }));
 		tablePrimera.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane = new JScrollPane(tablePrimera);
 
@@ -180,20 +161,14 @@ public class Principal extends JFrame implements ActionListener
 		JPanel pnl2 = new JPanel();
 		tabbedPane.addTab("Mantenimientos", null, pnl2, null);
 		GridBagLayout gbl_pnl2 = new GridBagLayout();
-		gbl_pnl2.columnWidths = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl2.rowHeights = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl2.columnWeights = new double[]
-		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnl2.rowWeights = new double[]
-		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl2.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl2.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl2.columnWeights = new double[] { 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl2.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnl2.setLayout(gbl_pnl2);
 
 		tableSegunda = new JTable();
-		tableSegunda.setModel(new DefaultTableModel(new Object[][]
-		{}, new String[]
-		{ "Horas", "Nombre", "Coste" }));
+		tableSegunda.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Horas", "Nombre", "Coste" }));
 		tableSegunda.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane2 = new JScrollPane(tableSegunda);
 
@@ -228,20 +203,14 @@ public class Principal extends JFrame implements ActionListener
 		JPanel pnl3 = new JPanel();
 		tabbedPane.addTab("Mecánicos", null, pnl3, null);
 		GridBagLayout gbl_pnl3 = new GridBagLayout();
-		gbl_pnl3.columnWidths = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl3.rowHeights = new int[]
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_pnl3.columnWeights = new double[]
-		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnl3.rowWeights = new double[]
-		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl3.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl3.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl3.columnWeights = new double[] { 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl3.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnl3.setLayout(gbl_pnl3);
 
 		tableTercera = new JTable();
-		tableTercera.setModel(new DefaultTableModel(new Object[][]
-		{}, new String[]
-		{ "DNI", "Nombre", "Apellido" }));
+		tableTercera.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "DNI", "Nombre", "Apellido" }));
 		tableTercera.getColumnModel().getColumn(0).setPreferredWidth(5);
 		JScrollPane scrollPane3 = new JScrollPane(tableTercera);
 
@@ -285,126 +254,155 @@ public class Principal extends JFrame implements ActionListener
 		btnModificarSegunda.addActionListener(this);
 		btnModificarTercera.addActionListener(this);
 		ActualizarTablas();
-		
+
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		if (e.getSource() == btnNuevoPrimera)
-		{
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNuevoPrimera) {
 			nueVagon.VaciarCampos();
 			nueVagon.setVisible(true);
 		}
-		if (e.getSource() == btnNuevoTercera)
-		{
+		if (e.getSource() == btnNuevoTercera) {
 			nueMecanico.VaciarCampos();
 			nueMecanico.setVisible(true);
 		}
-		if (e.getSource() == btnNuevoSegunda)
-		{
+		if (e.getSource() == btnNuevoSegunda) {
 			nueMantenimiento.CargarChoices();
 			nueMantenimiento.VaciarCampos();
 			nueMantenimiento.setVisible(true);
 		}
-		if (e.getSource() == btnModificarPrimera)
-		{
-			idVagon =(int)idsVagones.get(tablePrimera.getSelectedRow());
+		if (e.getSource() == btnModificarPrimera) {
+			if (tablePrimera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idVagon = (int) idsVagones.get(tablePrimera.getSelectedRow());
 			modVagon.CargarDatos(idVagon);
 			modVagon.setVisible(true);
+			}
 		}
-		if (e.getSource() == btnModificarSegunda)
-		{
-			
+		if (e.getSource() == btnModificarSegunda) {
+			if (tableSegunda.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
 			idMantenimiento = (int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			modMantenimiento.CargarChoices();
 			modMantenimiento.CargarDatos(idMantenimiento);
 			modMantenimiento.setVisible(true);
+			}
 		}
-		if (e.getSource() == btnModificarTercera)
-		{
+		if (e.getSource() == btnModificarTercera) {
+			if (tableTercera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
 			idMecanico = (int) idsMecanicos.get(tableTercera.getSelectedRow());
 			modMecanico.CargarDatos(idMecanico);
 			modMecanico.setVisible(true);
+			}
 		}
-		if (e.getSource() == btnVerPrimera)
-		{
-			
-			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
+		if (e.getSource() == btnVerPrimera) {
+			if (tablePrimera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idVagon = (int) idsVagones.get(tablePrimera.getSelectedRow());
 			new VerVagon();
+			}
 		}
-		if (e.getSource() == btnVerTercera)
-		{
-			idMecanico =(int) idsMecanicos.get(tableTercera.getSelectedRow());
-			new VerMecanico();
+		if (e.getSource() == btnVerTercera) {
+			if (tableTercera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+				idMecanico = (int) idsMecanicos.get(tableTercera.getSelectedRow());
+				new VerMecanico();
+			}
 		}
-		if (e.getSource() == btnVerSegunda)
-		{
-			idMantenimiento =(int) idsMantenimientos.get(tableSegunda.getSelectedRow());
+		if (e.getSource() == btnVerSegunda) {
+			if (tableSegunda.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idMantenimiento = (int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			new VerMantenimiento();
+			}
 		}
-		if (e.getSource() == btnBorrarSegunda)
-		{
-			idMantenimiento =(int) idsMantenimientos.get(tableSegunda.getSelectedRow());
+		if (e.getSource() == btnBorrarSegunda) {
+			if (tableSegunda.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idMantenimiento = (int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			borMantenimiento.CargarDatos(idMantenimiento);
 			borMantenimiento.setVisible(true);
+			}
 		}
-		if (e.getSource() == btnBorrarPrimera)
-		{
-			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
+		if (e.getSource() == btnBorrarPrimera) {
+			if (tablePrimera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idVagon = (int) idsVagones.get(tablePrimera.getSelectedRow());
 			borVagon.CargarDatos(idVagon);
 			borVagon.setVisible(true);
+			}
 		}
-		if (e.getSource() == btnBorrarTercera)
-		{
-			idMecanico =(int) idsMecanicos.get(tableTercera.getSelectedRow());
+		if (e.getSource() == btnBorrarTercera) {
+			if (tableTercera.getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(getContentPane(), "Seleccione un registro", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			else {
+			idMecanico = (int) idsMecanicos.get(tableTercera.getSelectedRow());
 			borMecanico.CargarDatos(idMecanico);
 			borMecanico.setVisible(true);
+			}
 		}
 	}
-	public static void ActualizarTablas()
-	{
-		//Resteo arrays ids
+
+	public static void ActualizarTablas() {
+		// Resteo arrays ids
 		idsVagones.clear();
 		idsMantenimientos.clear();
 		idsMecanicos.clear();
-		//Actualizar tabla Mantenimiento
+		// Actualizar tabla Mantenimiento
 		List<Mantenimiento> busqueda = MantenimientoDAO.buscarTodos();
-		DefaultTableModel modelo=(DefaultTableModel) Principal.tableSegunda.getModel();
-		int filas=Principal.tableSegunda.getRowCount();
-		for (int i=0;filas>i;i++)
-			 modelo.removeRow(0);
-		for (Mantenimiento m : busqueda)
-		{
+		DefaultTableModel modelo = (DefaultTableModel) Principal.tableSegunda.getModel();
+		int filas = Principal.tableSegunda.getRowCount();
+		for (int i = 0; filas > i; i++)
+			modelo.removeRow(0);
+		for (Mantenimiento m : busqueda) {
 			idsMantenimientos.add(m.getIdMantenimiento());
-			modelo.addRow(new Object[]{m.getHorasMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
-		
+			modelo.addRow(new Object[] { m.getHorasMantenimiento(), m.getNombreMantenimiento(),
+					m.getCosteMantenimiento() + "€" });
+
 		}
-		//Actualizar Tabla Mecanico
-		DefaultTableModel modelo2=(DefaultTableModel) Principal.tableTercera.getModel();
-		int filas2=Principal.tableTercera.getRowCount();
-		for (int i=0;filas2>i;i++)
-			 modelo2.removeRow(0);
+		// Actualizar Tabla Mecanico
+		DefaultTableModel modelo2 = (DefaultTableModel) Principal.tableTercera.getModel();
+		int filas2 = Principal.tableTercera.getRowCount();
+		for (int i = 0; filas2 > i; i++)
+			modelo2.removeRow(0);
 		List<Mecanico> busqueda2 = MecanicoDAO.buscarTodos();
 
-		for (Mecanico m : busqueda2)
-		{
+		for (Mecanico m : busqueda2) {
 			idsMecanicos.add(m.getIdMecanico());
-			modelo2.addRow(new Object[]{m.getDniMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
-		
+			modelo2.addRow(new Object[] { m.getDniMecanico(), m.getNombreMecanico(), m.getApellido1Mecanico() });
+
 		}
-		//Actualizar tabla Vagon
+		// Actualizar tabla Vagon
 		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
-		DefaultTableModel modelo3=(DefaultTableModel) Principal.tablePrimera.getModel();
-		int filas3=Principal.tablePrimera.getRowCount();
-		for (int i=0;filas3>i;i++)
-			 modelo3.removeRow(0);
-		for (Vagon m : busqueda3)
-		{
+		DefaultTableModel modelo3 = (DefaultTableModel) Principal.tablePrimera.getModel();
+		int filas3 = Principal.tablePrimera.getRowCount();
+		for (int i = 0; filas3 > i; i++)
+			modelo3.removeRow(0);
+		for (Vagon m : busqueda3) {
 			idsVagones.add(m.getIdVagon());
-			modelo3.addRow(new Object[]{m.getMatriculaVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
-		
+			modelo3.addRow(new Object[] { m.getMatriculaVagon(), m.getFabricanteVagon(), m.getModeloVagon() });
+
 		}
-		
+
 	}
+
 }
