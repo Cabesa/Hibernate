@@ -171,7 +171,9 @@ public class ModificarVagon extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (!ControlErrores.isNumeric(txtAntiguedad.getText())) {
+		if(txtAntiguedad.getText().isEmpty()||txtMatricula.getText().isEmpty()||txtCapacidad.getText().isEmpty()||txtFabricante.getText().isEmpty()||txtModelo.getText().isEmpty())
+			JOptionPane.showMessageDialog(getContentPane(), "Rellene los campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+		else if (!ControlErrores.isNumeric(txtAntiguedad.getText())) {
 			JOptionPane.showMessageDialog(getContentPane(), "La antiguedad tiene que ser un número entero", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		} else if (!ControlErrores.isNumeric(txtMatricula.getText())) {

@@ -178,7 +178,9 @@ public class ModificarMecanico extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(!ControlErrores.isNumeric(txtSueldo.getText()))
+		if(txtNombre.getText().isEmpty()||txtApellido1.getText().isEmpty()||txtApellido2.getText().isEmpty()||txtSueldo.getText().isEmpty()||txtDNI.getText().isEmpty())
+			JOptionPane.showMessageDialog(getContentPane(), "Rellene los campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+		else if(!ControlErrores.isNumeric(txtSueldo.getText()))
 		{
 			JOptionPane.showMessageDialog(getContentPane(), "El sueldo tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
 		}

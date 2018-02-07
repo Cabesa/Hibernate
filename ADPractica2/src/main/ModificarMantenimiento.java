@@ -232,7 +232,9 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(!ControlErrores.isNumeric(txtHoras.getText()))
+		if(txtHoras.getText().isEmpty()||txtCoste.getText().isEmpty()||txtNombre.getText().isEmpty())
+			JOptionPane.showMessageDialog(getContentPane(), "Rellene los campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+		else if(!ControlErrores.isNumeric(txtHoras.getText()))
 		{
 			JOptionPane.showMessageDialog(getContentPane(), "Las horas tienen que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
