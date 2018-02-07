@@ -309,21 +309,21 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnModificarPrimera)
 		{
-			idVagon =(int) tablePrimera.getValueAt(tablePrimera.getSelectedRow(), 0);
+			idVagon =(int)idsVagones.get(tablePrimera.getSelectedRow());
 			modVagon.CargarDatos(idVagon);
 			modVagon.setVisible(true);
 		}
 		if (e.getSource() == btnModificarSegunda)
 		{
 			
-			idMantenimiento = (int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			idMantenimiento = (int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			modMantenimiento.CargarChoices();
 			modMantenimiento.CargarDatos(idMantenimiento);
 			modMantenimiento.setVisible(true);
 		}
 		if (e.getSource() == btnModificarTercera)
 		{
-			idMecanico = (int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			idMecanico = (int) idsMecanicos.get(tableTercera.getSelectedRow());
 			modMecanico.CargarDatos(idMecanico);
 			modMecanico.setVisible(true);
 		}
@@ -335,17 +335,17 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnVerTercera)
 		{
-			idMecanico =(int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			idMecanico =(int) idsMecanicos.get(tableTercera.getSelectedRow());
 			new VerMecanico();
 		}
 		if (e.getSource() == btnVerSegunda)
 		{
-			idMantenimiento =(int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			idMantenimiento =(int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			new VerMantenimiento();
 		}
 		if (e.getSource() == btnBorrarSegunda)
 		{
-			idMantenimiento =(int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			idMantenimiento =(int) idsMantenimientos.get(tableSegunda.getSelectedRow());
 			borMantenimiento.CargarDatos(idMantenimiento);
 			borMantenimiento.setVisible(true);
 		}
@@ -357,7 +357,7 @@ public class Principal extends JFrame implements ActionListener
 		}
 		if (e.getSource() == btnBorrarTercera)
 		{
-			idMecanico =(int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			idMecanico =(int) idsMecanicos.get(tableTercera.getSelectedRow());
 			borMecanico.CargarDatos(idMecanico);
 			borMecanico.setVisible(true);
 		}
