@@ -195,22 +195,11 @@ public class ModificarVagon extends JDialog implements ActionListener {
 		v.setMatriculaVagon(Integer.parseInt(txtMatricula.getText()));
 		v.setModeloVagon(txtModelo.getText());
 		VagonDAO.modificar(v);
-		ActualizarTabla();
+		Principal.ActualizarTablas();
 		setVisible(false);
 	}
 
-	public void ActualizarTabla() {
-		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
-		DefaultTableModel modelo = (DefaultTableModel) Principal.tablePrimera.getModel();
-		int filas = Principal.tablePrimera.getRowCount();
-		for (int i = 0; filas > i; i++)
-			modelo.removeRow(0);
-		for (Vagon m : busqueda3) {
 
-			modelo.addRow(new Object[] { m.getIdVagon(), m.getFabricanteVagon(), m.getModeloVagon() });
-
-		}
-	}
 
 	public void CargarDatos(int id) {
 		Vagon v = VagonDAO.buscarPorID(Principal.idVagon);
