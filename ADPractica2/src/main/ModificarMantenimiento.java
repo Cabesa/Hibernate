@@ -18,6 +18,8 @@ import clasesDAO.VagonDAO;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
@@ -230,6 +232,15 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		if(!ControlErrores.isNumeric(txtHoras.getText()))
+		{
+			JOptionPane.showMessageDialog(getContentPane(), "Las horas tienen que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(!ControlErrores.isNumeric(txtCoste.getText()))
+		{
+			JOptionPane.showMessageDialog(getContentPane(), "El coste tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
 		GuardarMantenimiento(Principal.idMantenimiento);
 		
 	}

@@ -14,6 +14,8 @@ import clasesDAO.VagonDAO;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -175,6 +177,19 @@ public class NuevoVagon extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
+		if(!ControlErrores.isNumeric(txtAntiguedad.getText()))
+				{
+			JOptionPane.showMessageDialog(getContentPane(), "La antiguedad tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+		else if(!ControlErrores.isNumeric(txtMatricula.getText()))
+		{
+			JOptionPane.showMessageDialog(getContentPane(), "La matricula tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(!ControlErrores.isNumeric(txtCapacidad.getText()))
+		{
+			JOptionPane.showMessageDialog(getContentPane(), "La capacidad tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
 		CrearVagon();
 		
 	}

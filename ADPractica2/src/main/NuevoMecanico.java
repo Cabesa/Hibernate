@@ -14,6 +14,8 @@ import clasesDAO.MecanicoDAO;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -175,6 +177,11 @@ public class NuevoMecanico extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		if(!ControlErrores.isNumeric(txtSueldo.getText()))
+		{
+			JOptionPane.showMessageDialog(getContentPane(), "El sueldo tiene que ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
 		CrearMecanico();
 		
 	}

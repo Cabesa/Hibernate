@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="C:/Users/aleja/Desktop/Hibernate/Librerias/lucene-core-5.5.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/aleja/Desktop/Hibernate/Librerias/lucene-queryparser-5.5.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/aleja/Desktop/Hibernate/Librerias/xml-apis-1.3.03.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aleja/Desktop/JARS/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -14,6 +14,8 @@ import clasesDAO.VagonDAO;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -22,8 +24,7 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
-public class ModificarVagon extends JDialog implements ActionListener
-{
+public class ModificarVagon extends JDialog implements ActionListener {
 	private JTextField txtFabricante;
 	private JTextField txtModelo;
 	private JTextField txtAntiguedad;
@@ -34,15 +35,12 @@ public class ModificarVagon extends JDialog implements ActionListener
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
-	{
-		try
-		{
+	public static void main(String[] args) {
+		try {
 			NuevoVagon dialog = new NuevoVagon();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -50,15 +48,14 @@ public class ModificarVagon extends JDialog implements ActionListener
 	/**
 	 * Create the dialog.
 	 */
-	public ModificarVagon()
-	{
+	public ModificarVagon() {
 		setTitle("Modificar Vagón");
 		setBounds(100, 100, 450, 222);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
 		{
 			JLabel lblFabricante = new JLabel("Fabricante:");
@@ -164,7 +161,7 @@ public class ModificarVagon extends JDialog implements ActionListener
 			gbc_panel.gridy = 6;
 			getContentPane().add(panel, gbc_panel);
 			{
-				
+
 				panel.add(btnGuardar);
 			}
 		}
@@ -173,14 +170,23 @@ public class ModificarVagon extends JDialog implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0)
-	{
-		GuardarVagon();
-		
+	public void actionPerformed(ActionEvent arg0) {
+		if (!ControlErrores.isNumeric(txtAntiguedad.getText())) {
+			JOptionPane.showMessageDialog(getContentPane(), "La antiguedad tiene que ser un número entero", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} else if (!ControlErrores.isNumeric(txtMatricula.getText())) {
+			JOptionPane.showMessageDialog(getContentPane(), "La matricula tiene que ser un número entero", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} else if (!ControlErrores.isNumeric(txtCapacidad.getText())) {
+			JOptionPane.showMessageDialog(getContentPane(), "La capacidad tiene que ser un número entero", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} else
+			GuardarVagon();
+
 	}
-	
-	public void GuardarVagon(){
-		Vagon v=VagonDAO.buscarPorID(Principal.idVagon);
+
+	public void GuardarVagon() {
+		Vagon v = VagonDAO.buscarPorID(Principal.idVagon);
 		v.setAntiguedadVagon(Integer.parseInt(txtAntiguedad.getText()));
 		v.setCapacidadVagon(Integer.parseInt(txtCapacidad.getText()));
 		v.setFabricanteVagon(txtFabricante.getText());
@@ -190,23 +196,22 @@ public class ModificarVagon extends JDialog implements ActionListener
 		ActualizarTabla();
 		setVisible(false);
 	}
-	
-	public void ActualizarTabla(){
+
+	public void ActualizarTabla() {
 		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
-		DefaultTableModel modelo=(DefaultTableModel) Principal.tablePrimera.getModel();
-		int filas=Principal.tablePrimera.getRowCount();
-		for (int i=0;filas>i;i++)
-			 modelo.removeRow(0);
-		for (Vagon m : busqueda3)
-		{
-			
-			modelo.addRow(new Object[]{m.getIdVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
-		
+		DefaultTableModel modelo = (DefaultTableModel) Principal.tablePrimera.getModel();
+		int filas = Principal.tablePrimera.getRowCount();
+		for (int i = 0; filas > i; i++)
+			modelo.removeRow(0);
+		for (Vagon m : busqueda3) {
+
+			modelo.addRow(new Object[] { m.getIdVagon(), m.getFabricanteVagon(), m.getModeloVagon() });
+
 		}
 	}
-	public void CargarDatos(int id)
-	{
-		Vagon v=VagonDAO.buscarPorID(Principal.idVagon);
+
+	public void CargarDatos(int id) {
+		Vagon v = VagonDAO.buscarPorID(Principal.idVagon);
 		txtModelo.setText(v.getModeloVagon());
 		txtFabricante.setText(v.getFabricanteVagon());
 		txtAntiguedad.setText(String.valueOf(v.getAntiguedadVagon()));
