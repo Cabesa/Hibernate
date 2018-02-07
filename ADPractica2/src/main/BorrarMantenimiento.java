@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -43,6 +47,7 @@ public class BorrarMantenimiento extends JDialog implements ActionListener
 	 */
 	public BorrarMantenimiento()
 	{
+		ayuda();
 		setTitle("Borrar Mantenimiento");
 		setBounds(100, 100, 450, 131);
 		getContentPane().setLayout(new BorderLayout());
@@ -77,6 +82,24 @@ public class BorrarMantenimiento extends JDialog implements ActionListener
 		MantenimientoDAO.borrar(man);
 		Principal.ActualizarTablas();
 		setVisible(false);
+	}
+	
+	public void ayuda()
+	{
+		try
+		{
+			File fichero = new File("help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
+
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+
+			hb.enableHelpKey(getContentPane(), "borrar", helpset);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

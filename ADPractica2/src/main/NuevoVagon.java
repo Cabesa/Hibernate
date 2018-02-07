@@ -3,6 +3,8 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -20,6 +22,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -54,6 +58,7 @@ public class NuevoVagon extends JDialog implements ActionListener
 	 */
 	public NuevoVagon()
 	{
+		ayuda();
 		setTitle("Nuevo Vagón");
 		setBounds(100, 100, 450, 222);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -225,5 +230,21 @@ public class NuevoVagon extends JDialog implements ActionListener
 		txtMatricula.setText("");
 	}
 	
+	public void ayuda()
+	{
+		try
+		{
+			File fichero = new File("help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
 
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+
+			hb.enableHelpKey(getContentPane(), "nuevo", helpset);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

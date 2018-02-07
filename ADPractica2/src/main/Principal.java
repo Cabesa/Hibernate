@@ -1,12 +1,26 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,20 +33,6 @@ import clasesDAO.MantenimientoDAO;
 import clasesDAO.MecanicoDAO;
 import clasesDAO.VagonDAO;
 import util.HibernateUtil;
-
-import java.awt.GridBagLayout;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-
-import java.awt.GridBagConstraints;
-
-import javax.swing.JButton;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.GridLayout;
 
 public class Principal extends JFrame implements ActionListener {
 
@@ -89,12 +89,14 @@ public class Principal extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public Principal() {
-
+		
 		CargaInterfaz();
+		ayuda();
 
 	}
 
 	public void CargaInterfaz() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Taller");
 		setBounds(100, 100, 450, 300);
@@ -257,6 +259,24 @@ public class Principal extends JFrame implements ActionListener {
 
 	}
 
+	public void ayuda()
+	{
+		try
+		{
+			File fichero = new File("help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
+
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+
+			hb.enableHelpKey(getContentPane(), "aplicacion", helpset);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnNuevoPrimera) {

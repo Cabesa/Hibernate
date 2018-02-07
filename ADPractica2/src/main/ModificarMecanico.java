@@ -3,6 +3,8 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -20,6 +22,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -54,6 +58,7 @@ public class ModificarMecanico extends JDialog implements ActionListener
 	 */
 	public ModificarMecanico()
 	{
+		ayuda();
 		setTitle("Modificar Mecanico");
 		setBounds(100, 100, 450, 226);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -225,6 +230,24 @@ public class ModificarMecanico extends JDialog implements ActionListener
 		txtDNI.setText(m.getDniMecanico());
 		txtSueldo.setText(String.valueOf(m.getSueldoMecanico()));
 		
+	}
+	
+	public void ayuda()
+	{
+		try
+		{
+			File fichero = new File("help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
+
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+
+			hb.enableHelpKey(getContentPane(), "modificar", helpset);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }
