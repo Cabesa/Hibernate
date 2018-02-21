@@ -2,24 +2,23 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/classmate-1.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/hibernate-commons-annotations-5.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/hibernate-core-5.2.11.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/hibernate-search-engine-5.8.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/hibernate-search-orm-5.8.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/javassist-3.20.0-GA.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/jboss-annotations-api_1.2_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/jboss-jms-api_2.0_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/jboss-logging-3.3.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/lucene-core-5.5.4.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/lucene-queryparser-5.5.4.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="C:/hibernate/Librerias/xml-apis-1.3.03.jar"/>
-	<classpathentry kind="lib" path="C:/Users/vrdga/Desktop/javahelp-2.0.02.jar"/>
-	<classpathentry kind="lib" path="C:/Users/vrdga/Desktop/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/classmate-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/hibernate-commons-annotations-5.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/hibernate-core-5.2.11.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/hibernate-search-engine-5.8.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/hibernate-search-orm-5.8.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/jboss-annotations-api_1.2_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/jboss-jms-api_2.0_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/jboss-logging-3.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/lucene-core-5.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/lucene-queryparser-5.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/xml-apis-1.3.03.jar"/>
+	<classpathentry kind="lib" path="C:/hibernate/librerias/javahelp-2.0.02.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

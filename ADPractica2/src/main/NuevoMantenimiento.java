@@ -253,9 +253,17 @@ public class NuevoMantenimiento extends JDialog implements ActionListener
 		int idmecanico=choiMecanico.getSelectedIndex();
 		Vagon vagon=VagonDAO.buscarPorID((int) idsVagones.get(idvagon));
 		Mecanico mecanico=MecanicoDAO.buscarPorID((int) idsMecanicos.get(idmecanico));
+		List<Mantenimiento> busqueda2 = MantenimientoDAO.buscarTodos();
+		int id=0;
+		for (Mantenimiento m : busqueda2)
+		{
+			if(m.getIdMantenimiento()>id)
+			id=m.getIdMantenimiento();
 		
+		}
+		id++;
 		
-		Mantenimiento Mantenimiento = new Mantenimiento(txtNombre.getText(),Integer.parseInt(txtCoste.getText()),Integer.parseInt(txtHoras.getText()),txtInforme.getText(),vagon,mecanico);
+		Mantenimiento Mantenimiento = new Mantenimiento(id,txtNombre.getText(),Integer.parseInt(txtCoste.getText()),Integer.parseInt(txtHoras.getText()),txtInforme.getText(),vagon,mecanico);
 		MantenimientoDAO.guardar(Mantenimiento);
 		Principal.ActualizarTablas();
 		setVisible(false);

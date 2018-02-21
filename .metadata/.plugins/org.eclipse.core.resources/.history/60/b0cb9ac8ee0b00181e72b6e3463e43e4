@@ -1,0 +1,410 @@
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import org.hibernate.Session;
+
+import clasesBean.Mantenimiento;
+import clasesBean.Mecanico;
+import clasesBean.Vagon;
+import clasesDAO.MantenimientoDAO;
+import clasesDAO.MecanicoDAO;
+import clasesDAO.VagonDAO;
+import util.HibernateUtil;
+
+import java.awt.GridBagLayout;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+
+import java.awt.GridBagConstraints;
+
+import javax.swing.JButton;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.GridLayout;
+
+public class Principal extends JFrame implements ActionListener
+{
+
+	private JPanel contentPane;
+	static JTable tablePrimera;
+	static JTable tableSegunda;
+	static JTable tableTercera;
+	private JButton btnNuevoPrimera = new JButton("Nuevo");
+	private JButton btnBorrarPrimera = new JButton("Borrar");
+	private JButton btnModificarPrimera = new JButton("Modificar");
+	private JButton btnVerPrimera = new JButton("Ver");
+	private JButton btnNuevoSegunda = new JButton("Nuevo");
+	private JButton btnBorrarSegunda = new JButton("Borrar");
+	private JButton btnModificarSegunda = new JButton("Modificar");
+	private JButton btnVerSegunda = new JButton("Ver");
+	private JButton btnNuevoTercera = new JButton("Nuevo");
+	private JButton btnBorrarTercera = new JButton("Borrar");
+	private JButton btnModificarTercera = new JButton("Modificar");
+	private JButton btnVerTercera = new JButton("Ver");
+	static int idMantenimiento;
+	static int idMecanico;
+	static int idVagon;
+	ModificarMantenimiento modMantenimiento=new ModificarMantenimiento();
+	ModificarVagon modVagon=new ModificarVagon();
+	ModificarMecanico modMecanico=new ModificarMecanico();
+	BorrarMantenimiento borMantenimiento = new BorrarMantenimiento();
+	BorrarVagon borVagon = new BorrarVagon();
+	BorrarMecanico borMecanico = new BorrarMecanico();
+	NuevoMecanico nueMecanico = new NuevoMecanico();
+	NuevoVagon nueVagon = new NuevoVagon();
+	NuevoMantenimiento nueMantenimiento = new NuevoMantenimiento();
+	public static Session session = HibernateUtil.getSession();
+	static ArrayList idsMecanicos = new ArrayList();
+	static ArrayList idsVagones = new ArrayList();
+	static ArrayList idsMantenimientos = new ArrayList();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					Principal frame = new Principal();
+					frame.setVisible(true);
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Principal()
+	{
+		
+		CargaInterfaz();
+		
+
+	}
+
+
+
+	
+	public void CargaInterfaz(){
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Taller");
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]
+		{ 0, 0 };
+		gbl_contentPane.rowHeights = new int[]
+		{ 0, 0 };
+		gbl_contentPane.columnWeights = new double[]
+		{ 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[]
+		{ 1.0, Double.MIN_VALUE };
+		contentPane.setLayout(gbl_contentPane);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
+		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
+		gbc_tabbedPane.gridx = 0;
+		gbc_tabbedPane.gridy = 0;
+		contentPane.add(tabbedPane, gbc_tabbedPane);
+
+		JPanel pnl1 = new JPanel();
+		tabbedPane.addTab("Vagones", null, pnl1, null);
+		GridBagLayout gbl_pnl1 = new GridBagLayout();
+		gbl_pnl1.columnWidths = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl1.rowHeights = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl1.columnWeights = new double[]
+		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl1.rowWeights = new double[]
+		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		pnl1.setLayout(gbl_pnl1);
+
+		tablePrimera = new JTable();
+		tablePrimera.setModel(new DefaultTableModel(new Object[][]
+		{}, new String[]
+		{ "Matrícula", "Fabricante", "Módelo" }));
+		tablePrimera.getColumnModel().getColumn(0).setPreferredWidth(5);
+		JScrollPane scrollPane = new JScrollPane(tablePrimera);
+
+		GridBagConstraints gbc_tablePrimera = new GridBagConstraints();
+		gbc_tablePrimera.gridheight = 7;
+		gbc_tablePrimera.gridwidth = 6;
+		gbc_tablePrimera.insets = new Insets(0, 0, 5, 0);
+		gbc_tablePrimera.fill = GridBagConstraints.BOTH;
+		gbc_tablePrimera.gridx = 0;
+		gbc_tablePrimera.gridy = 0;
+
+		pnl1.add(scrollPane, gbc_tablePrimera);
+
+		JPanel pnlBotones = new JPanel();
+		GridBagConstraints gbc_pnlBotones = new GridBagConstraints();
+		gbc_pnlBotones.gridheight = 2;
+		gbc_pnlBotones.gridwidth = 6;
+		gbc_pnlBotones.fill = GridBagConstraints.BOTH;
+		gbc_pnlBotones.gridx = 0;
+		gbc_pnlBotones.gridy = 7;
+		pnl1.add(pnlBotones, gbc_pnlBotones);
+		pnlBotones.setLayout(new GridLayout(0, 4, 0, 0));
+
+		pnlBotones.add(btnNuevoPrimera);
+
+		pnlBotones.add(btnBorrarPrimera);
+
+		pnlBotones.add(btnModificarPrimera);
+
+		pnlBotones.add(btnVerPrimera);
+
+		JPanel pnl2 = new JPanel();
+		tabbedPane.addTab("Mantenimientos", null, pnl2, null);
+		GridBagLayout gbl_pnl2 = new GridBagLayout();
+		gbl_pnl2.columnWidths = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl2.rowHeights = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl2.columnWeights = new double[]
+		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl2.rowWeights = new double[]
+		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		pnl2.setLayout(gbl_pnl2);
+
+		tableSegunda = new JTable();
+		tableSegunda.setModel(new DefaultTableModel(new Object[][]
+		{}, new String[]
+		{ "Horas", "Nombre", "Coste" }));
+		tableSegunda.getColumnModel().getColumn(0).setPreferredWidth(5);
+		JScrollPane scrollPane2 = new JScrollPane(tableSegunda);
+
+		GridBagConstraints gbc_tableSegunda = new GridBagConstraints();
+		gbc_tableSegunda.gridheight = 7;
+		gbc_tableSegunda.gridwidth = 6;
+		gbc_tableSegunda.insets = new Insets(0, 0, 5, 0);
+		gbc_tableSegunda.fill = GridBagConstraints.BOTH;
+		gbc_tableSegunda.gridx = 0;
+		gbc_tableSegunda.gridy = 0;
+
+		pnl2.add(scrollPane2, gbc_tableSegunda);
+
+		JPanel pnlBotones2 = new JPanel();
+		GridBagConstraints gbc_pnlBotones2 = new GridBagConstraints();
+		gbc_pnlBotones2.gridheight = 2;
+		gbc_pnlBotones2.gridwidth = 6;
+		gbc_pnlBotones2.fill = GridBagConstraints.BOTH;
+		gbc_pnlBotones2.gridx = 0;
+		gbc_pnlBotones2.gridy = 7;
+		pnl2.add(pnlBotones2, gbc_pnlBotones2);
+		pnlBotones2.setLayout(new GridLayout(0, 4, 0, 0));
+
+		pnlBotones2.add(btnNuevoSegunda);
+
+		pnlBotones2.add(btnBorrarSegunda);
+
+		pnlBotones2.add(btnModificarSegunda);
+
+		pnlBotones2.add(btnVerSegunda);
+
+		JPanel pnl3 = new JPanel();
+		tabbedPane.addTab("Mecánicos", null, pnl3, null);
+		GridBagLayout gbl_pnl3 = new GridBagLayout();
+		gbl_pnl3.columnWidths = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl3.rowHeights = new int[]
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnl3.columnWeights = new double[]
+		{ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnl3.rowWeights = new double[]
+		{ 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		pnl3.setLayout(gbl_pnl3);
+
+		tableTercera = new JTable();
+		tableTercera.setModel(new DefaultTableModel(new Object[][]
+		{}, new String[]
+		{ "DNI", "Nombre", "Apellido" }));
+		tableTercera.getColumnModel().getColumn(0).setPreferredWidth(5);
+		JScrollPane scrollPane3 = new JScrollPane(tableTercera);
+
+		GridBagConstraints gbc_tableTercera = new GridBagConstraints();
+		gbc_tableTercera.gridheight = 7;
+		gbc_tableTercera.gridwidth = 6;
+		gbc_tableTercera.insets = new Insets(0, 0, 5, 0);
+		gbc_tableTercera.fill = GridBagConstraints.BOTH;
+		gbc_tableTercera.gridx = 0;
+		gbc_tableTercera.gridy = 0;
+
+		pnl3.add(scrollPane3, gbc_tableTercera);
+
+		JPanel pnlBotones3 = new JPanel();
+		GridBagConstraints gbc_pnlBotones3 = new GridBagConstraints();
+		gbc_pnlBotones3.gridheight = 2;
+		gbc_pnlBotones3.gridwidth = 6;
+		gbc_pnlBotones3.fill = GridBagConstraints.BOTH;
+		gbc_pnlBotones3.gridx = 0;
+		gbc_pnlBotones3.gridy = 7;
+		pnl3.add(pnlBotones3, gbc_pnlBotones3);
+		pnlBotones3.setLayout(new GridLayout(0, 4, 0, 0));
+
+		pnlBotones3.add(btnNuevoTercera);
+
+		pnlBotones3.add(btnBorrarTercera);
+
+		pnlBotones3.add(btnModificarTercera);
+
+		pnlBotones3.add(btnVerTercera);
+		btnNuevoPrimera.addActionListener(this);
+		btnNuevoSegunda.addActionListener(this);
+		btnNuevoTercera.addActionListener(this);
+		btnBorrarPrimera.addActionListener(this);
+		btnBorrarSegunda.addActionListener(this);
+		btnBorrarTercera.addActionListener(this);
+		btnVerPrimera.addActionListener(this);
+		btnVerSegunda.addActionListener(this);
+		btnVerTercera.addActionListener(this);
+		btnModificarPrimera.addActionListener(this);
+		btnModificarSegunda.addActionListener(this);
+		btnModificarTercera.addActionListener(this);
+		ActualizarTablas();
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == btnNuevoPrimera)
+		{
+			nueVagon.VaciarCampos();
+			nueVagon.setVisible(true);
+		}
+		if (e.getSource() == btnNuevoTercera)
+		{
+			nueMecanico.VaciarCampos();
+			nueMecanico.setVisible(true);
+		}
+		if (e.getSource() == btnNuevoSegunda)
+		{
+			nueMantenimiento.CargarChoices();
+			nueMantenimiento.VaciarCampos();
+			nueMantenimiento.setVisible(true);
+		}
+		if (e.getSource() == btnModificarPrimera)
+		{
+			idVagon =(int)idsVagones.get(tablePrimera.getSelectedRow());
+			modVagon.CargarDatos(idVagon);
+			modVagon.setVisible(true);
+		}
+		if (e.getSource() == btnModificarSegunda)
+		{
+			
+			idMantenimiento = (int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			modMantenimiento.CargarChoices();
+			modMantenimiento.CargarDatos(idMantenimiento);
+			modMantenimiento.setVisible(true);
+		}
+		if (e.getSource() == btnModificarTercera)
+		{
+			idMecanico = (int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			modMecanico.CargarDatos(idMecanico);
+			modMecanico.setVisible(true);
+		}
+		if (e.getSource() == btnVerPrimera)
+		{
+			
+			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
+			new VerVagon();
+		}
+		if (e.getSource() == btnVerTercera)
+		{
+			idMecanico =(int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			new VerMecanico();
+		}
+		if (e.getSource() == btnVerSegunda)
+		{
+			idMantenimiento =(int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			new VerMantenimiento();
+		}
+		if (e.getSource() == btnBorrarSegunda)
+		{
+			idMantenimiento =(int) tableSegunda.getValueAt(tableSegunda.getSelectedRow(), 0);
+			borMantenimiento.CargarDatos(idMantenimiento);
+			borMantenimiento.setVisible(true);
+		}
+		if (e.getSource() == btnBorrarPrimera)
+		{
+			idVagon =(int) idsVagones.get(tablePrimera.getSelectedRow());
+			borVagon.CargarDatos(idVagon);
+			borVagon.setVisible(true);
+		}
+		if (e.getSource() == btnBorrarTercera)
+		{
+			idMecanico =(int) tableTercera.getValueAt(tableTercera.getSelectedRow(), 0);
+			borMecanico.CargarDatos(idMecanico);
+			borMecanico.setVisible(true);
+		}
+	}
+	public static void ActualizarTablas()
+	{
+		//Resteo arrays ids
+		idsVagones.clear();
+		idsMantenimientos.clear();
+		idsMecanicos.clear();
+		//Actualizar tabla Mantenimiento
+		List<Mantenimiento> busqueda = MantenimientoDAO.buscarTodos();
+		DefaultTableModel modelo=(DefaultTableModel) Principal.tableSegunda.getModel();
+		int filas=Principal.tableSegunda.getRowCount();
+		for (int i=0;filas>i;i++)
+			 modelo.removeRow(0);
+		for (Mantenimiento m : busqueda)
+		{
+			idsMantenimientos.add(m.getIdMantenimiento());
+			modelo.addRow(new Object[]{m.getHorasMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
+		
+		}
+		//Actualizar Tabla Mecanico
+		DefaultTableModel modelo2=(DefaultTableModel) Principal.tableTercera.getModel();
+		int filas2=Principal.tableTercera.getRowCount();
+		for (int i=0;filas2>i;i++)
+			 modelo2.removeRow(0);
+		List<Mecanico> busqueda2 = MecanicoDAO.buscarTodos();
+
+		for (Mecanico m : busqueda2)
+		{
+			idsMecanicos.add(m.getIdMecanico());
+			modelo2.addRow(new Object[]{m.getDniMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
+		
+		}
+		//Actualizar tabla Vagon
+		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
+		DefaultTableModel modelo3=(DefaultTableModel) Principal.tablePrimera.getModel();
+		int filas3=Principal.tablePrimera.getRowCount();
+		for (int i=0;filas3>i;i++)
+			 modelo3.removeRow(0);
+		for (Vagon m : busqueda3)
+		{
+			idsVagones.add(m.getIdVagon());
+			modelo3.addRow(new Object[]{m.getMatriculaVagon(),m.getFabricanteVagon(),m.getModeloVagon()});
+		
+		}
+		
+	}
+}
