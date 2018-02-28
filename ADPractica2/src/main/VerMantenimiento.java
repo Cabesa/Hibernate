@@ -67,7 +67,7 @@ public class VerMantenimiento extends JDialog
 	public VerMantenimiento()
 	{
 		ayuda();
-		setTitle("Modificar Mantenimiento");
+		setTitle("Ver Mantenimiento");
 		setBounds(100, 100, 450, 342);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
