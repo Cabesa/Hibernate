@@ -213,6 +213,7 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 		
 		setVisible(false);
 		}
+	
 	public void CargarChoices(){
 		List<Mecanico> busqueda = MecanicoDAO.buscarTodos();
 		choiVagon.removeAll();
@@ -266,7 +267,7 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 		
 		MantenimientoDAO.modificarLoc(m);
 		Principal.ActualizarTablas();
-		this.dispose();
+		setVisible(false);
 		
 	}
 	
@@ -279,7 +280,7 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 		
 		for (int i = 0; i < idsVagones.size(); i++)
 		{
-			if(idsVagones.get(i).equals(man.getMecanico().getIdMecanico()))
+			if(idsVagones.get(i).equals(man.getVagon().getIdVagon()))
 			{
 				choiVagon.select(i);
 			}

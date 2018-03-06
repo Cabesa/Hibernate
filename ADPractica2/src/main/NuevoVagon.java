@@ -205,10 +205,6 @@ public class NuevoVagon extends JDialog implements ActionListener
 	public void CrearVagon(){
 		List<Vagon> busqueda3 = VagonDAO.buscarTodos();
 		int id=0;
-		DefaultTableModel modelo3=(DefaultTableModel) Principal.tablePrimera.getModel();
-		int filas3=Principal.tablePrimera.getRowCount();
-		for (int i=0;filas3>i;i++)
-			 modelo3.removeRow(0);
 		for (Vagon m : busqueda3)
 		{
 			if (m.getIdVagon()>id)

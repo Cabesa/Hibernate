@@ -210,6 +210,7 @@ public class NuevoMantenimiento extends JDialog implements ActionListener
 		btnCrear.addActionListener(this);
 		setVisible(false);
 		}
+	
 	public void CargarChoices(){
 		choiVagon.removeAll();
 		choiMecanico.removeAll();
