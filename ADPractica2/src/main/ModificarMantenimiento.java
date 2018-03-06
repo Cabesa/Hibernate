@@ -265,23 +265,11 @@ public class ModificarMantenimiento extends JDialog implements ActionListener
 		m.setVagon(vagon);
 		
 		MantenimientoDAO.modificarLoc(m);
-		ActualizarTabla();
+		Principal.ActualizarTablas();
 		this.dispose();
 		
 	}
-	public void ActualizarTabla(){
-		List<Mantenimiento> busqueda3 = MantenimientoDAO.buscarTodos();
-		DefaultTableModel modelo=(DefaultTableModel) Principal.tableSegunda.getModel();
-		int filas=Principal.tableSegunda.getRowCount();
-		for (int i=0;filas>i;i++)
-			 modelo.removeRow(0);
-		for (Mantenimiento m : busqueda3)
-		{
-			
-			modelo.addRow(new Object[]{m.getIdMantenimiento(),m.getNombreMantenimiento(),m.getCosteMantenimiento()+"€"});
-		
-		}
-	}
+	
 	public void CargarDatos(int id){
 		Mantenimiento man=MantenimientoDAO.buscarPorID(id);
 		txtNombre.setText(man.getNombreMantenimiento());

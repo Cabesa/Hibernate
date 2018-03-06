@@ -201,26 +201,12 @@ public class ModificarMecanico extends JDialog implements ActionListener
 		m.setDniMecanico(txtDNI.getText());
 		m.setSueldoMecanico(Integer.parseInt(txtSueldo.getText()));
 		MecanicoDAO.modificar(m);
-		ActualizarTabla();
+		Principal.ActualizarTablas();
 		setVisible(false);
 	}
 	
-	public void ActualizarTabla(){
-		List<Mecanico> busqueda3 = MecanicoDAO.buscarTodos();
-		DefaultTableModel modelo=(DefaultTableModel) Principal.tableTercera.getModel();
-		int filas=Principal.tableTercera.getRowCount();
-		for (int i=0;filas>i;i++)
-			 modelo.removeRow(0);
-		List<Mecanico> busqueda2 = MecanicoDAO.buscarTodos();
 
-		for (Mecanico m : busqueda2)
-		{
-			
-			modelo.addRow(new Object[]{m.getIdMecanico(),m.getNombreMecanico(),m.getApellido1Mecanico()});
-		
-		}
 	
-	}
 	public void CargarDatos(int id)
 	{
 		Mecanico m=MecanicoDAO.buscarPorID(Principal.idMecanico);
